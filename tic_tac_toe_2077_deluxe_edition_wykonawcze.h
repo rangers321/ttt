@@ -15,11 +15,13 @@ int sprawdz_ukos2(struct pole p, int a, int b);
 
 int sprawdz(struct pole p, int a, int b);
 
-void dostepneruchy(struct pole p);
+struct pole dostepneruchy(struct pole p);
 
-struct pole grajX(struct pole p);
+void wypiszdostepneruchy(struct pole p);
 
-struct pole grajO(struct pole p);
+struct pole interfejs(struct pole p);
+
+struct pole graj(struct pole p);
 
 int ponow(void);
 

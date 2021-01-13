@@ -15,8 +15,14 @@ int main(int argc, char **argv)
     p.pozostale_ruchy = wys*szer;
     for(int i=1; i<(wys*szer)*2; i++)
     {
-            p = grajX(p);
-            if(p.wygrana == 1)
+        system("clear");
+        wypisz(p);
+        p.czymgrasz = 'X';
+        
+        p = interfejs(p);
+        p = graj(p); 
+        
+        if(p.wygrana == 1)
             {
                 goto koniecX;
             }
@@ -28,9 +34,15 @@ int main(int argc, char **argv)
             {
                 goto remis;
             }
-            else;
+            else;   
 
-            p = grajO(p);
+        system("clear");
+        wypisz(p);
+        p.czymgrasz = 'O';
+        
+        p = interfejs(p);
+        p = graj(p);
+
             if(p.wygrana == 1)
             {
                 goto koniecO;
@@ -46,6 +58,10 @@ int main(int argc, char **argv)
             }
             else;
     }
+            
+            
+
+            
 
     koniecX: system("clear");
     wypisz(p);

@@ -11,8 +11,8 @@
 
 struct pole
 {
-    char plansza[wys+1][szer+1], ruch_zajety[wys+1][szer+1], czymgrasz[2];
-    int wygrana, pozostale_ruchy, koniec;
+    char plansza[wys+1][szer+1], ruch_zajety[wys+1][szer+1], dostepne[wys+1][szer+1], *czymgrasz;
+    int wygrana, pozostale_ruchy, koniec, wysokosc, szerokosc;
 };
 
 void wypisz(struct pole p);

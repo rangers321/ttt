@@ -176,8 +176,9 @@ int sprawdz(struct pole p, int a, int b)
     else return 0;
 }
 
-void dostepneruchy(struct pole p)
+struct pole dostepneruchy(struct pole stare)
 {
+    struct pole p = stare;
     int i, j;
     printf("Lista dostępnych ruchów:\n");
     for(i = 1; i<=wys; i++)
@@ -186,102 +187,99 @@ void dostepneruchy(struct pole p)
         {    
             if(p.ruch_zajety[i][j] == 0)
             {
-                printf("%d %d   ", j, i);
+                p.dostepne[i][j] = 1;
             }
-            else;
+            else
+            {
+                p.dostepne[i][j] = 0;
+            }
         }
     }
     printf("\n\n");
+
+    return p;
 }
 
-struct pole grajX(struct pole p)
+void wypiszdostepneruchy(struct pole p)
+{
+    int i, j;
+    for(i = 1; i<=wys; i++)
+    {
+        for(j = 1; j<=szer; j++)
+        {    
+            if(p.ruch_zajety[i][j] == 0)
+            printf("%d %d  ", j, i);
+        }
+    }
+    printf("\n");
+}
+
+struct pole interfejs(struct pole p)
 {
     int a, b;
-    char i[6], j[6];
+    char i[10], j[6];
     float c, d;
-    system("clear");
-    wypisz(p);
-    X: printf("Gdzie chcesz postawić X?\n");
-    scanf("%s", i);
+    ponow:
+    scanf("%s", i);   
     if(strcmp(i, "exit") == 0)
     {
         p.koniec = 1;
+        return p;
     }
     else if(strcmp(i, "moves") == 0)
     {
-        dostepneruchy(p);
-        goto X;
+        wypiszdostepneruchy(p);
+        goto ponow;
     }
     else if(strcmp(i, "commands") == 0)
     {
         komendy();
-        goto X;
+        goto ponow;
     }
-    else
-    {
-        scanf("%s", j);
-        c = atof(i);
-        d = atof(j);
-        a = c;
-        b = d;
-        if(p.ruch_zajety[b][a] == 1 || a>szer || b>wys || a == 0 || b == 0)
-        {
-            printf("RUCH NIEDOZWOLONY!\n\n");
-            goto X;
-        }
-        else
-        {
-            p.plansza[b][a] = 'X';
-            p.ruch_zajety[b][a] = 1;
-            p.pozostale_ruchy=p.pozostale_ruchy-1;
-            p.wygrana = 0;
-            p.wygrana = sprawdz(p, a, b);
+    
+    scanf("%s", j);
+    p.szerokosc = atoi(i);
+    p.wysokosc = atoi(j);
 
-        }
+    if(p.ruch_zajety[p.wysokosc][p.szerokosc] == 1 || p.szerokosc>szer || p.wysokosc>wys || p.szerokosc == 0 || p.wysokosc == 0)
+    {
+        printf("RUCH NIEDOZWOLONY!\n\n");
+        goto ponow;
     }
+
     return p;
 }
 
-struct pole grajO(struct pole p)
+struct pole graj(struct pole stare)
 {
-    int a, b;
-    char i[6], j[6];
-    float c, d;
-    system("clear");
-    wypisz(p);
-    O: printf("Gdzie chcesz postawić O?\n");
-    scanf("%s", i);
-    if(strcmp(i, "exit") == 0)
-    {
-        p.koniec = 1;
-    }
-    else if(strcmp(i, "moves") == 0)
-    {
-        dostepneruchy(p);
+    struct pole p = stare;
+    
+    if(p.czymgrasz == 'X')
+        goto X;
+    else if(p.czymgrasz == 'O')
         goto O;
-    }
-    else
-    {
-        scanf("%s", j);
-        c = atof(i);
-        d = atof(j);
-        a = c;
-        b = d;
-        if(p.ruch_zajety[b][a] == 1 || a>szer || b>wys || a == 0 || b == 0)
-        {
-            printf("RUCH NIEDOZWOLONY!\n\n");
-            goto O;
-        }
-        else
-        {
-            p.plansza[b][a] = 'O';
-            p.ruch_zajety[b][a] = 1;
-            p.pozostale_ruchy=p.pozostale_ruchy-1;
-            p.wygrana = 0;
-            p.wygrana = sprawdz(p, a, b);
-        }
-    }
+    
+    
+    X:
+    p.plansza[p.wysokosc][p.szerokosc] = 'X';
+    p.ruch_zajety[p.wysokosc][p.szerokosc] = 1;
+    p.pozostale_ruchy=p.pozostale_ruchy-1;
+    p.wygrana = 0;
+    p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
+    p.czymgrasz = 'O';
+    
     return p;
+
+    O:
+    p.plansza[p.wysokosc][p.szerokosc] = 'O';
+    p.ruch_zajety[p.wysokosc][p.szerokosc] = 1;
+    p.pozostale_ruchy=p.pozostale_ruchy-1;
+    p.wygrana = 0;
+    p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
+    p.czymgrasz = 'X';
+
+    return p;
+
 }
 
 int ponow(void)
