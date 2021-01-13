@@ -2,17 +2,17 @@ DEPS=tic_tac_toe_2077_deluxe_edition.o tic_tac_toe_2077_deluxe_edition_funkcjona
 
 
 main: $(DEPS)
-	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition -Wall --pedantic
+	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition.a
 
 %.o:%.c
 	cc -c $^ -o $@
 
 clean:
-	rm -f tic_tac_toe_2077_deluxe_edition
+	rm -f tic_tac_toe_2077_deluxe_edition.a
 	rm -f *.o
 
-p: tic_tac_toe_2077_deluxe_edition
-	./tic_tac_toe_2077_deluxe_edition
+p: tic_tac_toe_2077_deluxe_edition.a
+	./tic_tac_toe_2077_deluxe_edition.a
 
-test:tic_tac_toe_2077_deluxe_edition
-	valgrind --leak-check=full -s ./tic_tac_toe_2077_deluxe_edition
+test:tic_tac_toe_2077_deluxe_edition.a
+	valgrind --leak-check=full -s ./tic_tac_toe_2077_deluxe_edition.a
