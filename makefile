@@ -1,8 +1,8 @@
-DEPS=tic_tac_toe_2077_deluxe_edition.o tic_tac_toe_2077_deluxe_edition_bot.o tic_tac_toe_2077_deluxe_edition_funkcjonalne.o tic_tac_toe_2077_deluxe_edition_wykonawcze.o
+DEPS=tic_tac_toe_2077_deluxe_edition_bot.o tic_tac_toe_2077_deluxe_edition_funkcjonalne.o tic_tac_toe_2077_deluxe_edition_wykonawcze.o
 
 
 main: $(DEPS)
-	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition.a
+	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition_bot.a
 
 %.o:%.c
 	cc -c $^ -o $@

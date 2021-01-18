@@ -176,27 +176,135 @@ int sprawdz(struct pole p, int a, int b)
     else return 0;
 }
 
-struct listaruchow dostepneruchy(struct pole stare)
+int sprawdzbotpoziom(struct pole p)
 {
-    struct pole p = stare;
-    struct listaruchow lr;
+    int ileO = 0;
+    int suma = 0;
+
+    for(int i = 1; i<=szer; i++)
+    {
+        for(int j = 1; j<=wys; j++)
+        {
+            if(p.plansza[i][j] == 'O')
+            {
+                ileO++;
+
+            }
+            else if(p.plansza[i][j] == 'X')
+            {
+                ileO = 0;
+                break;
+            }
+            suma += ileO;
+        } 
+    }
+
+    return suma;
+}
+
+int sprawdzbotpion(struct pole p)
+{
+    int ileO = 0;
+    int suma = 0;
+
+    for(int i = 1; i<=szer; i++)
+    {
+        for(int j = 1; j<=wys; j++)
+        {
+            if(p.plansza[j][i] == 'O')
+            {
+                ileO++;
+
+            }
+            else if(p.plansza[j][i] == 'X')
+            {
+                ileO = 0;
+                break;
+            }
+            suma += ileO;
+        } 
+    }
+
+    return suma;
+}
+
+int sprawdzbotukos1(struct pole p)
+{
+    int ileO = 0;
+    int suma = 0;
+
+    for(int i = 1; i<=wys; i++)
+    {
+        if(p.plansza[i][i] == 'O')
+        {
+            ileO++;
+        }
+        else if(p.plansza[i][i] == 'X')
+        {
+            ileO = 0;
+            break;
+        }
+    }
+
+    suma += ileO;
+
+    return suma;
+}
+
+int sprawdzbotukos2(struct pole p)
+{
+    int ileO = 0;
+    int suma = 0;
+
+    for(int i = 1; i<=wys; i++)
+    {
+        if(p.plansza[wys-i][i] == 'O')
+        {
+            ileO++;
+        }
+        else if(p.plansza[wys-i][i] == 'X')
+        {
+            ileO = 0;
+            break;
+        }
+    }
+
+    suma += ileO;
+
+    return suma;
+}
+
+int sprawdzbot(struct pole p)
+{
+    int suma = sprawdzbotpoziom(p) + sprawdzbotpion(p) + sprawdzbotukos1(p) + sprawdzbotukos2(p);
+
+    return suma;
+}
+
+struct listaruchow* dostepneruchy(struct pole* stare)
+{
+    struct pole* p = stare;
+    struct listaruchow* lr;
     int i, j;
-    //printf("Lista dostępnych ruchów:\n");
     for(i = 1; i<=wys; i++)
     {
         for(j = 1; j<=szer; j++)
         {    
-            if(p.ruch_zajety[i][j] == 0)
+            if(p->ruch_zajety[i][j] == 0)
             {
-                lr.ruchy[i][j] = 1;
+                //printf("%d %d", i, j);
+                
+                lr->x = 3;
+                lr->y = 3;
+                
+                lr->ruchy[i][j] = 1;
             }
             else
             {
-                lr.ruchy[i][j] = 0;
+                lr->ruchy[i][j] = 0;
             }
         }
     }
-    printf("\n\n");
 
     return lr;
 }

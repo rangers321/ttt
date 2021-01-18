@@ -18,6 +18,7 @@ struct pole
 struct listaruchow
 {
     char ruchy[wys+1][szer+1];
+    int x, y;
     struct listaruchow* nast;
 };
 

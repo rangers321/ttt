@@ -1,5 +1,43 @@
+#include<stdio.h>
+
 #include"tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
 #include"tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
+
+int negmax(struct pole* p, int glebokosc, int alfa, int beta)
+{
+    int v;
+    int z;
+    
+    if(!glebokosc)
+    {
+        return sprawdzbot(*p);
+    }
+    int ocenawezla = -1000;
+    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
+    {
+        // lr->x = x;
+        // lr->y = y;
+        struct pole dziecko = graj(*p);
+        int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
+        if(nowaocena > ocenawezla)
+        {
+            ocenawezla = nowaocena;
+            lr->x = v;
+            lr->y = z;
+        }
+        if(ocenawezla > alfa)
+        alfa = ocenawezla;
+        if(alfa > beta)
+        break;
+    }
+    //printf("%d\n", ocenawezla);
+    //printf("%d %d", x, y);
+    
+    p->plansza[v][z] = 'O';
+
+    return ocenawezla;
+
+}
 
 
 int main(int argc, char **argv)
@@ -15,7 +53,7 @@ int main(int argc, char **argv)
     p.pozostale_ruchy = wys*szer;
     for(int i=1; i<(wys*szer)*2; i++)
     {
-        system("clear");
+        //system("clear");
         wypisz(p);
         p.czymgrasz = 'X';
         printf("Ruch X\n\n");
@@ -36,22 +74,27 @@ int main(int argc, char **argv)
             }
             else;   
 
-        system("clear");
+        //system("clear");
         wypisz(p);
         p.czymgrasz = 'O';
-        printf("Ruch O\n\n");
-        p = interfejs(p);
-        p = graj(p);
+        //printf("Ruch O\n\n");
+        // p = interfejs(p);
+        // p = graj(p);
+            int chuj = 5;
+            int max = 1000;
+            int min = -1000;
+            int u = negmax(&p, chuj , max, min);
+            printf("%d\n", u);
 
             if(p.wygrana == 1)
             {
                 goto koniecO;
             }
-            else if(p.koniec == 1)
-            {
-                return 0;
-            }
-            else;
+            // else if(p.koniec == 1)
+            // {
+            //     return 0;
+            // }
+            // else;
             if(p.pozostale_ruchy == 0)
             {
                 goto remis;

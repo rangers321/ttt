@@ -15,7 +15,17 @@ int sprawdz_ukos2(struct pole p, int a, int b);
 
 int sprawdz(struct pole p, int a, int b);
 
-struct listaruchow dostepneruchy(struct pole p);
+int sprawdzbotpoziom(struct pole p);
+
+int sprawdzbotpion(struct pole p);
+
+int sprawdzbotukos1(struct pole p);
+
+int sprawdzbotukos2(struct pole p);
+
+int sprawdzbot(struct pole p);
+
+struct listaruchow* dostepneruchy(struct pole* p);
 
 void wypiszdostepneruchy(struct pole p);
 
