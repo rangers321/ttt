@@ -15,7 +15,7 @@ int sprawdz_ukos2(struct pole p, int a, int b);
 
 int sprawdz(struct pole p, int a, int b);
 
-struct pole dostepneruchy(struct pole p);
+struct listaruchow dostepneruchy(struct pole p);
 
 void wypiszdostepneruchy(struct pole p);
 

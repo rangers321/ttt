@@ -18,7 +18,7 @@ int main(int argc, char **argv)
         system("clear");
         wypisz(p);
         p.czymgrasz = 'X';
-        
+        printf("Ruch X\n\n");
         p = interfejs(p);
         p = graj(p); 
         
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
         system("clear");
         wypisz(p);
         p.czymgrasz = 'O';
-        
+        printf("Ruch O\n\n");
         p = interfejs(p);
         p = graj(p);
 

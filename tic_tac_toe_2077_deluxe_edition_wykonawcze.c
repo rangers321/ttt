@@ -176,28 +176,29 @@ int sprawdz(struct pole p, int a, int b)
     else return 0;
 }
 
-struct pole dostepneruchy(struct pole stare)
+struct listaruchow dostepneruchy(struct pole stare)
 {
     struct pole p = stare;
+    struct listaruchow lr;
     int i, j;
-    printf("Lista dostępnych ruchów:\n");
+    //printf("Lista dostępnych ruchów:\n");
     for(i = 1; i<=wys; i++)
     {
         for(j = 1; j<=szer; j++)
         {    
             if(p.ruch_zajety[i][j] == 0)
             {
-                p.dostepne[i][j] = 1;
+                lr.ruchy[i][j] = 1;
             }
             else
             {
-                p.dostepne[i][j] = 0;
+                lr.ruchy[i][j] = 0;
             }
         }
     }
     printf("\n\n");
 
-    return p;
+    return lr;
 }
 
 void wypiszdostepneruchy(struct pole p)
