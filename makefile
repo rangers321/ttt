@@ -1,4 +1,4 @@
-DEPS=tic_tac_toe_2077_deluxe_edition.o tic_tac_toe_2077_deluxe_edition_funkcjonalne.o tic_tac_toe_2077_deluxe_edition_wykonawcze.o
+DEPS=tic_tac_toe_2077_deluxe_edition.o tic_tac_toe_2077_deluxe_edition_bot.o tic_tac_toe_2077_deluxe_edition_funkcjonalne.o tic_tac_toe_2077_deluxe_edition_wykonawcze.o
 
 
 main: $(DEPS)
@@ -9,6 +9,7 @@ main: $(DEPS)
 
 clean:
 	rm -f tic_tac_toe_2077_deluxe_edition.a
+	rm -f tic_tac_toe_2077_deluxe_edition_bot.a
 	rm -f *.o
 
 p: tic_tac_toe_2077_deluxe_edition.a
@@ -16,3 +17,6 @@ p: tic_tac_toe_2077_deluxe_edition.a
 
 test:tic_tac_toe_2077_deluxe_edition.a
 	valgrind --leak-check=full -s ./tic_tac_toe_2077_deluxe_edition.a
+
+bot:tic_tac_toe_2077_deluxe_edition_bot.a
+	./tic_tac_toe_2077_deluxe_edition_bot.a
