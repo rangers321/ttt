@@ -80,10 +80,10 @@ int main(int argc, char **argv)
         //printf("Ruch O\n\n");
         // p = interfejs(p);
         // p = graj(p);
-            int chuj = 5;
+            int c = 5;
             int max = 1000;
             int min = -1000;
-            int u = negmax(&p, chuj , max, min);
+            int u = negmax(&p, c , max, min);
             printf("%d\n", u);
 
             if(p.wygrana == 1)
