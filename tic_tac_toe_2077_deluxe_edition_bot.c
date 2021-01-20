@@ -6,32 +6,25 @@
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
     int x, y;
-    int k = 1;
-    printf("siema\n");
+
+    printf(" \n");
     if(!glebokosc)
     {
         return sprawdzbot(*p);
     }
     int ocenawezla = -1000;
-    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr, k++)
+    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
     {
         
-        struct pole dziecko = graj(*p);
+        struct pole dziecko = graj(*p, *lr);
         int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
-        if(nowaocena > ocenawezla){
+        if(nowaocena > ocenawezla)
         ocenawezla = nowaocena;
-        x = lr->ruch1[k];
-        y = lr->ruch2[k];
-        }
         if(ocenawezla > alfa)
         alfa = ocenawezla;
         if(alfa > beta)
         break;
     }
-
-
-    p->wysokosc = x;
-    p->szerokosc = y;
     return ocenawezla;
 
 }
@@ -45,18 +38,19 @@ int main(int argc, char **argv)
     scanf("%c", q);
     start: system("clear");
     struct pole p = zeruj();
-    struct listaruchow lr;
     p.wygrana = 0;
     p.koniec = 0;
     p.pozostale_ruchy = wys*szer;
+    int v = -10000;
+    p.czymgrasz = 'X';
     for(int i=1; i<(wys*szer)*2; i++)
     {
         system("clear");
         wypisz(p);
         printf("Ruch X\n\n");
-        p.czymgrasz = 'X';
+        struct listaruchow* lr = dostepneruchy(&p);
         p = interfejs(p);
-        p = graj(p);
+        p = graj(p, *lr);
         
         if(p.wygrana == 1)
             {
@@ -73,13 +67,28 @@ int main(int argc, char **argv)
             else;   
         system("clear");
         wypisz(p);
-            int c = 5;
+            int c = 10;
             int max = 10000;
             int min = -10000;
-            p.czymgrasz = 'O';
-            int u = negmax(&p, c , max, min);
-            p = graj(p);
-
+            for(int i = 1; i<=wys; i++)
+            {
+                for(int j = 1; j<=szer; j++)
+                {
+                    int u = negmax(&p, c , max, min);
+                    if(u>v)
+                    {
+                        if(p.ruch_zajety[j][i] == 0)
+                        {
+                            v = u;
+                            p.wysokosc = i;
+                            p.szerokosc = j;
+                        }
+                    }
+                }
+            }
+            lr = dostepneruchy(&p);
+            p = graj(p, *lr);
+            p.czymgrasz = 'X';
 
             if(p.wygrana == 1)
             {

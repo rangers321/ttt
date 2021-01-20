@@ -31,7 +31,7 @@ void wypiszdostepneruchy(struct pole p);
 
 struct pole interfejs(struct pole p);
 
-struct pole graj(struct pole p);
+struct pole graj(struct pole p, struct listaruchow starelr);
 
 int ponow(void);
 

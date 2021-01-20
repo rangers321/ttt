@@ -358,22 +358,17 @@ struct listaruchow* dostepneruchy(struct pole* stare)
     struct pole* p = stare;
     struct listaruchow* lr;
     int i, j;
-    int k = 1;
     for(i = 1; i<=wys; i++)
     {
         for(j = 1; j<=szer; j++)
         {    
             if(p->ruch_zajety[i][j] == 0)
             {
-                lr->ruchy[i][j] = 1;
-                lr->ruch1[k] = i;
-                lr->ruch2[k] = j;
-                k++;
+                lr->ruch[0] = i;
+                lr->ruch[1] = j;
+                return lr;
             }
-            else
-            {
-                lr->ruchy[i][j] = 0;
-            }
+            else;
         }
     }
 
@@ -430,9 +425,10 @@ struct pole interfejs(struct pole p)
     return p;
 }
 
-struct pole graj(struct pole stare)
+struct pole graj(struct pole stare, struct listaruchow starelr)
 {
     struct pole p = stare;
+    struct listaruchow lr;
     
     if(p.czymgrasz == 'X')
         goto X;
@@ -447,15 +443,18 @@ struct pole graj(struct pole stare)
     p.wygrana = 0;
     p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
     
+    p.czymgrasz = 'O';
+    
     return p;
 
     O:
-    p.plansza[p.wysokosc][p.szerokosc] = 'O';
-    p.ruch_zajety[p.wysokosc][p.szerokosc] = 1;
+    p.plansza[lr.ruch[0]][lr.ruch[1]] = 'O';
+    p.ruch_zajety[lr.ruch[0]][lr.ruch[1]] = 1;
     p.pozostale_ruchy=p.pozostale_ruchy-1;
     p.wygrana = 0;
-    p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
-
+    p.wygrana = sprawdz(p, lr.ruch[1], lr.ruch[0]);
+    p.czymgrasz = 'X';
+    
     return p;
 
 }
