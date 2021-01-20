@@ -20,3 +20,7 @@ test:tic_tac_toe_2077_deluxe_edition.a
 
 bot:tic_tac_toe_2077_deluxe_edition_bot.a
 	./tic_tac_toe_2077_deluxe_edition_bot.a
+
+test_sprawdz:
+	cc tostery/sprawdz_test.c tic_tac_toe_2077_deluxe_edition_funkcjonalne.c -o sprawdz_test.a
+	./sprawdz_test.a
