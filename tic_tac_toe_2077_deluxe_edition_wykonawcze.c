@@ -180,6 +180,8 @@ int sprawdzbotpoziom(struct pole p)
 {
     int ileO = 0;
     int suma = 0;
+    int ileX = 0;
+    int czyX = 0;
 
     for(int i = 1; i<=szer; i++)
     {
@@ -187,16 +189,36 @@ int sprawdzbotpoziom(struct pole p)
         {
             if(p.plansza[i][j] == 'O')
             {
+                ileX = 0;
                 ileO++;
-
+                if(ileO == wygrywa)
+                {
+                    return 1000;
+                }
             }
             else if(p.plansza[i][j] == 'X')
             {
                 ileO = 0;
-                break;
+                czyX = 1;
+                ileX++;
+                if(ileX == wygrywa)
+                {
+                    return -1000;
+                }
+                //break;
             }
-            suma += ileO;
         } 
+        if(czyX != 0)
+        {
+            ileO = 0;
+            ileX = 0;
+        }
+        else
+        {
+            suma += ileO;
+            ileO = 0;
+            ileX = 0;
+        }
     }
 
     return suma;
@@ -206,6 +228,8 @@ int sprawdzbotpion(struct pole p)
 {
     int ileO = 0;
     int suma = 0;
+    int ileX = 0;
+    int czyX = 0;
 
     for(int i = 1; i<=szer; i++)
     {
@@ -213,16 +237,36 @@ int sprawdzbotpion(struct pole p)
         {
             if(p.plansza[j][i] == 'O')
             {
+                ileX = 0;
                 ileO++;
-
+                if(ileO == wygrywa)
+                {
+                    return 1000;
+                }
             }
             else if(p.plansza[j][i] == 'X')
             {
                 ileO = 0;
-                break;
+                ileX++;
+                int czyX = 1;
+                if(ileX == wygrywa)
+                {
+                    return -1000;
+                }
+                // break;
             }
-            suma += ileO;
         } 
+        if(czyX != 0)
+        {
+            ileO = 0;
+            ileX = 0;
+        }
+        else
+        {
+            suma += ileO;
+            ileO = 0;
+            ileX = 0;
+        }
     }
 
     return suma;
@@ -231,47 +275,75 @@ int sprawdzbotpion(struct pole p)
 int sprawdzbotukos1(struct pole p)
 {
     int ileO = 0;
-    int suma = 0;
+    int ileX = 0;
+    int czyX = 0;
 
     for(int i = 1; i<=wys; i++)
     {
         if(p.plansza[i][i] == 'O')
         {
+            ileX = 0;
             ileO++;
+            if(ileO == wygrywa)
+            {
+                return 1000;
+            }
         }
         else if(p.plansza[i][i] == 'X')
         {
             ileO = 0;
-            break;
+            ileX++;
+            czyX = 1;
+            if(ileX == wygrywa)
+            {
+                return -1000;
+            }
+            // break;
         }
     }
-
-    suma += ileO;
-
-    return suma;
+    if(czyX != 0)
+    {
+        return 0;
+    }
+    else
+    return ileO;
 }
 
 int sprawdzbotukos2(struct pole p)
 {
     int ileO = 0;
-    int suma = 0;
+    int ileX = 0;
+    int czyX = 0;
 
     for(int i = 1; i<=wys; i++)
     {
-        if(p.plansza[wys-i][i] == 'O')
+        if(p.plansza[(wys+1)-i][i] == 'O')
         {
+            ileX = 0;
             ileO++;
+            if(ileO == wygrywa)
+            {
+                return 1000;
+            }
         }
-        else if(p.plansza[wys-i][i] == 'X')
+        else if(p.plansza[(wys+1)-i][i] == 'X')
         {
             ileO = 0;
-            break;
+            ileX++;
+            czyX = 1;
+            if(ileX == wygrywa)
+            {
+                return -1000;
+            }
+            // break;
         }
     }
-
-    suma += ileO;
-
-    return suma;
+    if(czyX != 0)
+    {
+        return 0;
+    }
+    else
+    return ileO;
 }
 
 int sprawdzbot(struct pole p)

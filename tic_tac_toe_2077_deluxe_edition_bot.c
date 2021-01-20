@@ -5,8 +5,8 @@
 
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
-    int v;
-    int z;
+    // int v;
+    // int z;
     
     if(!glebokosc)
     {
@@ -22,8 +22,8 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
         if(nowaocena > ocenawezla)
         {
             ocenawezla = nowaocena;
-            lr->x = v;
-            lr->y = z;
+            // lr->x = v;
+            // lr->y = z;
         }
         if(ocenawezla > alfa)
         alfa = ocenawezla;
@@ -33,7 +33,7 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
     //printf("%d\n", ocenawezla);
     //printf("%d %d", x, y);
     
-    p->plansza[v][z] = 'O';
+    // p->plansza[v][z] = 'O';
 
     return ocenawezla;
 
