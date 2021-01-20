@@ -358,7 +358,7 @@ struct listaruchow* dostepneruchy(struct pole* stare)
     struct pole* p = stare;
     struct listaruchow* lr;
     int i, j;
-    int k = 0;
+    int k = 1;
     for(i = 1; i<=wys; i++)
     {
         for(j = 1; j<=szer; j++)
@@ -366,8 +366,9 @@ struct listaruchow* dostepneruchy(struct pole* stare)
             if(p->ruch_zajety[i][j] == 0)
             {
                 lr->ruchy[i][j] = 1;
-                lr->x[k] = i;
-                lr->y[k] = j;
+                lr->ruch1[k] = i;
+                lr->ruch2[k] = j;
+                k++;
             }
             else
             {
@@ -445,7 +446,6 @@ struct pole graj(struct pole stare)
     p.pozostale_ruchy=p.pozostale_ruchy-1;
     p.wygrana = 0;
     p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
-    p.czymgrasz = 'O';
     
     return p;
 
@@ -455,7 +455,6 @@ struct pole graj(struct pole stare)
     p.pozostale_ruchy=p.pozostale_ruchy-1;
     p.wygrana = 0;
     p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
-    p.czymgrasz = 'X';
 
     return p;
 

@@ -5,23 +5,33 @@
 
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
+    int x, y;
+    int k = 1;
+    printf("siema\n");
     if(!glebokosc)
     {
         return sprawdzbot(*p);
     }
     int ocenawezla = -1000;
-    for(struct listaruchow* lr = dostepneruchy(&p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
+    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr, k++)
     {
+        
         struct pole dziecko = graj(*p);
         int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
-        if(nowaocena > ocenawezla)
+        if(nowaocena > ocenawezla){
         ocenawezla = nowaocena;
+        x = lr->ruch1[k];
+        y = lr->ruch2[k];
+        }
         if(ocenawezla > alfa)
         alfa = ocenawezla;
         if(alfa > beta)
         break;
     }
 
+
+    p->wysokosc = x;
+    p->szerokosc = y;
     return ocenawezla;
 
 }
@@ -30,7 +40,7 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 int main(int argc, char **argv)
 {
     char q[1];
-    //system("clear");
+    system("clear");
     printf("INSTRUKCJA:\n\nSkładnia współrzędnych - K W\ncommands - wypisuje dostępne komendy\nmoves - wypisuje dostępne ruchy\nexit - kończy grę\n\n");
     scanf("%c", q);
     start: system("clear");
@@ -41,12 +51,12 @@ int main(int argc, char **argv)
     p.pozostale_ruchy = wys*szer;
     for(int i=1; i<(wys*szer)*2; i++)
     {
-        //system("clear");
+        system("clear");
         wypisz(p);
-        p.czymgrasz = 'X';
         printf("Ruch X\n\n");
+        p.czymgrasz = 'X';
         p = interfejs(p);
-        p = graj(p, lr); 
+        p = graj(p);
         
         if(p.wygrana == 1)
             {
@@ -61,28 +71,20 @@ int main(int argc, char **argv)
                 goto remis;
             }
             else;   
-
-        //system("clear");
+        system("clear");
         wypisz(p);
-        p.czymgrasz = 'O';
-        //printf("Ruch O\n\n");
-        // p = interfejs(p);
-        // p = graj(p);
             int c = 5;
             int max = 10000;
             int min = -10000;
+            p.czymgrasz = 'O';
             int u = negmax(&p, c , max, min);
-            printf("%d\n", u);
+            p = graj(p);
+
 
             if(p.wygrana == 1)
             {
                 goto koniecO;
             }
-            // else if(p.koniec == 1)
-            // {
-            //     return 0;
-            // }
-            // else;
             if(p.pozostale_ruchy == 0)
             {
                 goto remis;
@@ -94,7 +96,7 @@ int main(int argc, char **argv)
 
             
 
-    koniecX: //system("clear");
+    koniecX: system("clear");
     wypisz(p);
     printf("Gratulacje! Wygrywasz X!\n\n");
     if(ponow() == 1)
@@ -104,7 +106,7 @@ int main(int argc, char **argv)
     else
     return 0;
 
-    koniecO: //system("clear");
+    koniecO: system("clear");
     wypisz(p);
     printf("Gratulacje! Wygrywasz O!\n\n");
     if(ponow() == 1)
@@ -114,7 +116,7 @@ int main(int argc, char **argv)
     else
     return 0;
 
-    remis: //system("clear");
+    remis: system("clear");
     wypisz(p);
     printf("No niestety mamy remis :(\n\n");
     if(ponow() == 1)

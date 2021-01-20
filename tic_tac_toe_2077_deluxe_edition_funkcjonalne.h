@@ -17,7 +17,7 @@ struct pole
 
 struct listaruchow
 {
-    char ruchy[wys+1][szer+1];
+    char ruchy[wys+1][szer+1], ruch1[(wys*szer)+2], ruch2[(wys*szer)+2];
     struct listaruchow* nast;
 };
 
