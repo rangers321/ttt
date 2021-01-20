@@ -5,8 +5,6 @@
 
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
-    // int v;
-    // int z;
     
     if(!glebokosc)
     {
@@ -15,26 +13,18 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
     int ocenawezla = -1000;
     for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
     {
-        // lr->x = x;
-        // lr->y = y;
         struct pole dziecko = graj(*p);
         int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
         if(nowaocena > ocenawezla)
         {
             ocenawezla = nowaocena;
-            // lr->x = v;
-            // lr->y = z;
         }
         if(ocenawezla > alfa)
         alfa = ocenawezla;
         if(alfa > beta)
         break;
     }
-    //printf("%d\n", ocenawezla);
-    //printf("%d %d", x, y);
     
-    // p->plansza[v][z] = 'O';
-
     return ocenawezla;
 
 }
@@ -81,8 +71,8 @@ int main(int argc, char **argv)
         // p = interfejs(p);
         // p = graj(p);
             int c = 5;
-            int max = 1000;
-            int min = -1000;
+            int max = 10000;
+            int min = -10000;
             int u = negmax(&p, c , max, min);
             printf("%d\n", u);
 

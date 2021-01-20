@@ -364,10 +364,6 @@ struct listaruchow* dostepneruchy(struct pole* stare)
         {    
             if(p->ruch_zajety[i][j] == 0)
             {
-                //printf("%d %d", i, j);
-                
-                lr->x = 3;
-                lr->y = 3;
                 
                 lr->ruchy[i][j] = 1;
             }
