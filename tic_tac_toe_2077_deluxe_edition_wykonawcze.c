@@ -358,14 +358,16 @@ struct listaruchow* dostepneruchy(struct pole* stare)
     struct pole* p = stare;
     struct listaruchow* lr;
     int i, j;
+    int k = 0;
     for(i = 1; i<=wys; i++)
     {
         for(j = 1; j<=szer; j++)
         {    
             if(p->ruch_zajety[i][j] == 0)
             {
-                
                 lr->ruchy[i][j] = 1;
+                lr->x[k] = i;
+                lr->y[k] = j;
             }
             else
             {

@@ -5,26 +5,23 @@
 
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
-    
     if(!glebokosc)
     {
         return sprawdzbot(*p);
     }
     int ocenawezla = -1000;
-    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
+    for(struct listaruchow* lr = dostepneruchy(&p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
     {
         struct pole dziecko = graj(*p);
         int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
         if(nowaocena > ocenawezla)
-        {
-            ocenawezla = nowaocena;
-        }
+        ocenawezla = nowaocena;
         if(ocenawezla > alfa)
         alfa = ocenawezla;
         if(alfa > beta)
         break;
     }
-    
+
     return ocenawezla;
 
 }
@@ -33,11 +30,12 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 int main(int argc, char **argv)
 {
     char q[1];
-    system("clear");
+    //system("clear");
     printf("INSTRUKCJA:\n\nSkładnia współrzędnych - K W\ncommands - wypisuje dostępne komendy\nmoves - wypisuje dostępne ruchy\nexit - kończy grę\n\n");
     scanf("%c", q);
     start: system("clear");
     struct pole p = zeruj();
+    struct listaruchow lr;
     p.wygrana = 0;
     p.koniec = 0;
     p.pozostale_ruchy = wys*szer;
@@ -48,7 +46,7 @@ int main(int argc, char **argv)
         p.czymgrasz = 'X';
         printf("Ruch X\n\n");
         p = interfejs(p);
-        p = graj(p); 
+        p = graj(p, lr); 
         
         if(p.wygrana == 1)
             {
@@ -96,7 +94,7 @@ int main(int argc, char **argv)
 
             
 
-    koniecX: system("clear");
+    koniecX: //system("clear");
     wypisz(p);
     printf("Gratulacje! Wygrywasz X!\n\n");
     if(ponow() == 1)
@@ -106,7 +104,7 @@ int main(int argc, char **argv)
     else
     return 0;
 
-    koniecO: system("clear");
+    koniecO: //system("clear");
     wypisz(p);
     printf("Gratulacje! Wygrywasz O!\n\n");
     if(ponow() == 1)
@@ -116,7 +114,7 @@ int main(int argc, char **argv)
     else
     return 0;
 
-    remis: system("clear");
+    remis: //system("clear");
     wypisz(p);
     printf("No niestety mamy remis :(\n\n");
     if(ponow() == 1)
