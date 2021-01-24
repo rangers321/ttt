@@ -5,7 +5,6 @@
 
 int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 {
-    int x, y;
 
     printf(" \n");
     if(!glebokosc)
@@ -19,11 +18,17 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
         struct pole dziecko = graj(*p, *lr);
         int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
         if(nowaocena > ocenawezla)
-        ocenawezla = nowaocena;
+        {
+            ocenawezla = nowaocena;
+        }
         if(ocenawezla > alfa)
-        alfa = ocenawezla;
+        {
+            alfa = ocenawezla;
+        }
         if(alfa > beta)
-        break;
+        {
+            break;
+        }
     }
     return ocenawezla;
 
@@ -33,24 +38,24 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 int main(int argc, char **argv)
 {
     char q[1];
-    system("clear");
+    //system("clear");
     printf("INSTRUKCJA:\n\nSkładnia współrzędnych - K W\ncommands - wypisuje dostępne komendy\nmoves - wypisuje dostępne ruchy\nexit - kończy grę\n\n");
     scanf("%c", q);
     start: system("clear");
     struct pole p = zeruj();
     p.wygrana = 0;
     p.koniec = 0;
-    p.pozostale_ruchy = wys*szer;
-    int v = -10000;
     p.czymgrasz = 'X';
+    int v = -10000;
+    p.pozostale_ruchy = wys*szer;
+    struct listaruchow lr;
     for(int i=1; i<(wys*szer)*2; i++)
     {
-        system("clear");
+        //system("clear");
         wypisz(p);
         printf("Ruch X\n\n");
-        struct listaruchow* lr = dostepneruchy(&p);
         p = interfejs(p);
-        p = graj(p, *lr);
+        p = graj(p, lr);
         
         if(p.wygrana == 1)
             {
@@ -64,31 +69,37 @@ int main(int argc, char **argv)
             {
                 goto remis;
             }
-            else;   
-        system("clear");
+            else;
+        
+        //system("clear");
         wypisz(p);
-            int c = 10;
+            int c = 4;
             int max = 10000;
             int min = -10000;
+            int k = 1;
+            int x = 1;
             for(int i = 1; i<=wys; i++)
             {
                 for(int j = 1; j<=szer; j++)
                 {
-                    int u = negmax(&p, c , max, min);
-                    if(u>v)
+                    if(p.ruch_zajety[j][i] == 0)
                     {
-                        if(p.ruch_zajety[j][i] == 0)
+                        int u = negmax(&p, c , max, min);
+                        printf("%d: %d\n", k, u);
+                        if(u>v)
                         {
+                            x = k;
                             v = u;
-                            p.wysokosc = i;
-                            p.szerokosc = j;
+                            lr.x = i;
+                            lr.y = j;
                         }
                     }
+                    k++;
                 }
             }
-            lr = dostepneruchy(&p);
-            p = graj(p, *lr);
-            p.czymgrasz = 'X';
+            p.czymgrasz = 'O';
+            printf("Wybieram: %d  %d %d %d\n", x, v, lr.x, lr.y);
+            p = graj(p, lr);
 
             if(p.wygrana == 1)
             {

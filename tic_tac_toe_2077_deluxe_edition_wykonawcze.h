@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 #include "tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
 
 int sprawdz_poziom(struct pole p,int a, int b);
@@ -31,7 +32,7 @@ void wypiszdostepneruchy(struct pole p);
 
 struct pole interfejs(struct pole p);
 
-struct pole graj(struct pole p, struct listaruchow starelr);
+struct pole graj(struct pole stare, struct listaruchow starelr);
 
 int ponow(void);
 

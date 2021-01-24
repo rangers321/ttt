@@ -17,8 +17,10 @@ struct pole
 
 struct listaruchow
 {
-    char ruchy[wys+1][szer+1], ruch1[(wys*szer)+2], ruch2[(wys*szer)+2], ruch[100];
+    int x, y;
+    int a[szer+1], b[wys+1];
     struct listaruchow* nast;
+    char ruchy[wys+1][szer+1];
 };
 
 void wypisz(struct pole p);
