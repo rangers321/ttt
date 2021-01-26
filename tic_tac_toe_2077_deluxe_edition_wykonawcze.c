@@ -3,10 +3,10 @@
 
 int sprawdz_poziom(struct pole p,int a, int b)
 {
-    int i = 1;
+    int i = 0;
     int ileX = 0;
     int ileO = 0;
-    for(i = 1; i<=szer; i++)
+    for(i = 0; i<szer; i++)
     {
         if(p.plansza[b][i] == 'X' || p.plansza[b][i] == 'O')
         {
@@ -16,7 +16,14 @@ int sprawdz_poziom(struct pole p,int a, int b)
                 ileO = 0;
                 if(ileX == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'X')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'O')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }
@@ -26,7 +33,14 @@ int sprawdz_poziom(struct pole p,int a, int b)
                 ileX = 0;
                 if(ileO == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'O')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'X')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }
@@ -43,10 +57,10 @@ int sprawdz_poziom(struct pole p,int a, int b)
 
 int sprawdz_pion(struct pole p,int a, int b)
 {
-    int i = 1;
+    int i = 0;
     int ileX = 0;
     int ileO = 0;
-    for(i = 1; i<=wys; i++)
+    for(i = 0; i<wys; i++)
     {
         if(p.plansza[i][a] == 'X' || p.plansza[i][a] == 'O')
         {
@@ -56,7 +70,14 @@ int sprawdz_pion(struct pole p,int a, int b)
                 ileO = 0;
                 if(ileX == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'X')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'O')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }
@@ -66,7 +87,14 @@ int sprawdz_pion(struct pole p,int a, int b)
                 ileX = 0;
                 if(ileO == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'O')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'X')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }
@@ -86,17 +114,24 @@ int sprawdz_ukos1(struct pole p,int a, int b)
     int ileX = 0;
     int ileO = 0;
 
-        while((a-(b-1)+i)<=szer && (1+i)<=wys)
+        while((a-(b)+i)<szer && (i)<wys)
         {
-            if(p.plansza[1+i][a-(b-1)+i] == 'X' || p.plansza[1+i][a-(b-1)+i] == 'O')
+            if(p.plansza[i][a-(b)+i] == 'X' || p.plansza[i][a-(b)+i] == 'O')
             {
-                if(p.plansza[1+i][a-(b-1)+i] == 'X')
+                if(p.plansza[i][a-(b)+i] == 'X')
                 {
                     ileX++;
                     ileO = 0;
                     if(ileX == wygrywa)
                     {
-                        return 1;
+                        if(p.czymgrasz == 'X')
+                        {
+                            return 1000;
+                        }
+                        else if(p.czymgrasz == 'O')
+                        {
+                            return -1000;
+                        }   
                     }
                     else;
                 }
@@ -106,7 +141,14 @@ int sprawdz_ukos1(struct pole p,int a, int b)
                     ileX = 0;
                     if(ileO == wygrywa)
                     {
-                        return 1;
+                        if(p.czymgrasz == 'O')
+                        {
+                            return 1000;
+                        }
+                        else if(p.czymgrasz == 'X')
+                        {
+                            return -1000;
+                        }
                     }
                     else;
                 }      
@@ -127,17 +169,24 @@ int sprawdz_ukos2(struct pole p, int a, int b)
     int ileX = 0;
     int ileO = 0;
     
-    while((a+(b-1)-i)>=1 && (1+i)<=wys)
+    while((a+(b)-i)>=0 && (i)<wys)
     {
-        if(p.plansza[1+i][a+(b-1)-i] == 'X' || p.plansza[i+1][a+(b-1)-i] == 'O')
+        if(p.plansza[i][a+(b)-i] == 'X' || p.plansza[i][a+(b)-i] == 'O')
         {
-            if(p.plansza[1+i][a+(b-1)-i] == 'X')
+            if(p.plansza[i][a+(b)-i] == 'X')
             {
                 ileX++;
                 ileO = 0;
                 if(ileX == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'X')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'O')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }
@@ -147,7 +196,14 @@ int sprawdz_ukos2(struct pole p, int a, int b)
                 ileX = 0;
                 if(ileO == wygrywa)
                 {
-                    return 1;
+                    if(p.czymgrasz == 'O')
+                    {
+                        return 1000;
+                    }
+                    else if(p.czymgrasz == 'X')
+                    {
+                        return -1000;
+                    }
                 }
                 else;
             }    
@@ -169,11 +225,16 @@ int sprawdz(struct pole p, int a, int b)
     y = sprawdz_pion(p, a, b);
     z1 = sprawdz_ukos1(p, a, b);
     z2 = sprawdz_ukos2(p, a, b);
-    if(x==1 || y==1 || z1==1 || z2==1)
-    {
-        return 1;
-    }
-    else return 0;
+    if(x != 0)
+        return x;
+    else if(y != 0)
+        return y;
+    else if(z1 != 0)
+        return z1;
+    else if(z2 != 0)
+        return z2;
+    else
+        return 0;
 }
 
 int sprawdzbotpoziom(struct pole p)
@@ -181,11 +242,10 @@ int sprawdzbotpoziom(struct pole p)
     int ileO = 0;
     int suma = 0;
     int ileX = 0;
-    int czyX = 0;
 
-    for(int i = 1; i<=szer; i++)
+    for(int i = 0; i<szer; i++)
     {
-        for(int j = 1; j<=wys; j++)
+        for(int j = 0; j<wys; j++)
         {
             if(p.plansza[i][j] == 'O')
             {
@@ -193,36 +253,28 @@ int sprawdzbotpoziom(struct pole p)
                 ileO++;
                 if(ileO == wygrywa)
                 {
-                    return 1000;
+                    if(p.czymgrasz == 'O')
+                        return 1000;
+                    else if(p.czymgrasz == 'X')
+                        return -1000;
+                    
                 }
             }
             else if(p.plansza[i][j] == 'X')
             {
                 ileO = 0;
-                czyX = 1;
                 ileX++;
                 if(ileX == wygrywa)
                 {
-                    return -1000;
+                    if(p.czymgrasz == 'O')
+                        return -1000;
+                    else if(p.czymgrasz == 'X')
+                        return 1000;
                 }
             }
         } 
-        if(czyX == 1)
-        {
-            ileO = 0;
-            ileX = 0;
-            czyX = 0;
-        }
-        else
-        {
-            suma = suma + ileO;
-            ileO = 0;
-            ileX = 0;
-            czyX = 0;
-        }
     }
-
-    return suma;
+    return 0;
 }
 
 int sprawdzbotpion(struct pole p)
@@ -230,11 +282,10 @@ int sprawdzbotpion(struct pole p)
     int ileO = 0;
     int suma = 0;
     int ileX = 0;
-    int czyX = 0;
 
-    for(int i = 1; i<=szer; i++)
+    for(int i = 0; i<szer; i++)
     {
-        for(int j = 1; j<=wys; j++)
+        for(int j = 0; j<wys; j++)
         {
             if(p.plansza[j][i] == 'O')
             {
@@ -242,45 +293,36 @@ int sprawdzbotpion(struct pole p)
                 ileO++;
                 if(ileO == wygrywa)
                 {
-                    return 1000;
+                    if(p.czymgrasz == 'O')
+                        return 1000;
+                    else if(p.czymgrasz == 'X')
+                        return -1000;
                 }
             }
             else if(p.plansza[j][i] == 'X')
             {
                 ileO = 0;
                 ileX++;
-                czyX = 1;
                 if(ileX == wygrywa)
                 {
-                    return -1000;
+                    if(p.czymgrasz == 'O')
+                        return -1000;
+                    else if(p.czymgrasz == 'X')
+                        return 1000;
                 }
             }
         } 
-        if(czyX == 1)
-        {
-            ileO = 0;
-            ileX = 0;
-            czyX = 0;
-        }
-        else
-        {
-            suma = suma + ileO;
-            ileO = 0;
-            ileX = 0;
-            czyX = 0;
-        }
     }
 
-    return suma;
+    return 0;
 }
 
 int sprawdzbotukos1(struct pole p)
 {
     int ileO = 0;
     int ileX = 0;
-    int czyX = 0;
 
-    for(int i = 1; i<=wys; i++)
+    for(int i = 0; i<wys; i++)
     {
         if(p.plansza[i][i] == 'O')
         {
@@ -288,117 +330,138 @@ int sprawdzbotukos1(struct pole p)
             ileO++;
             if(ileO == wygrywa)
             {
-                return 1000;
+                if(p.czymgrasz == 'O')
+                    return 1000;
+                else if(p.czymgrasz == 'X')
+                    return -1000;
             }
         }
         else if(p.plansza[i][i] == 'X')
         {
             ileO = 0;
             ileX++;
-            czyX = 1;
             if(ileX == wygrywa)
             {
-                return -1000;
+                if(p.czymgrasz == 'O')
+                    return -1000;
+                else if(p.czymgrasz == 'X')
+                    return 1000;
             }
         }
     }
-    if(czyX == 1)
-    {
-        return 0;
-    }
-    else
-    return ileO;
+    return 0;
 }
 
 int sprawdzbotukos2(struct pole p)
 {
     int ileO = 0;
     int ileX = 0;
-    int czyX = 0;
 
-    for(int i = 1; i<=wys; i++)
+    for(int i = 0; i<wys; i++)
     {
-        if(p.plansza[(wys+1)-i][i] == 'O')
+        if(p.plansza[(wys-1)-i][i] == 'O')
         {
             ileX = 0;
             ileO++;
             if(ileO == wygrywa)
             {
-                return 1000;
+                if(p.czymgrasz == 'O')
+                    return 1000;
+                else if(p.czymgrasz == 'X')
+                    return -1000;
             }
         }
-        else if(p.plansza[(wys+1)-i][i] == 'X')
+        else if(p.plansza[(wys-1)-i][i] == 'X')
         {
             ileO = 0;
             ileX++;
-            czyX = 1;
             if(ileX == wygrywa)
             {
-                return -1000;
+                if(p.czymgrasz == 'O')
+                    return -1000;
+                else if(p.czymgrasz == 'X')
+                    return 1000;
             }
         }
     }
-    if(czyX == 1)
-    {
-        return 0;
-    }
-    else
-    return ileO;
+    
+    return 0;
 }
 
 int sprawdzbot(struct pole p)
 {
-    int suma = sprawdzbotpoziom(p) + sprawdzbotpion(p) + sprawdzbotukos1(p) + sprawdzbotukos2(p);
-    return suma;
+    int x, y, z1, z2 = 0;
+    x = sprawdzbotpoziom(p);
+    y = sprawdzbotpion(p);
+    z1 = sprawdzbotukos1(p);
+    z2 = sprawdzbotukos2(p);
+    if(x != 0)
+        return x;
+    else if(y != 0)
+        return y;
+    else if(z1 != 0)
+        return z1;
+    else if(z2 != 0)
+        return z2;
+    else
+        return 0;
 }
 
 struct listaruchow* dostepneruchy(struct pole* p)
 {
-    int i, j;
-    int k = 0;
-    struct listaruchow* lr = (struct listaruchow*) malloc(sizeof(struct listaruchow));
+int i,j;
+  struct listaruchow *glowa = NULL;
+  struct listaruchow *lista = NULL;
+  struct listaruchow *r = NULL;
 
-    for(i = 1; i<=wys; i++)
-    {
-        for(j = 1; j<=szer; j++)
-        {
-            if(p->ruch_zajety[i][j] == 0)
-            {
-                lr->a[k] = j;
-                lr->b[k] = i;
-                k++;
-            }
+  for(i=0;i<wys;i++)
+    for(j=0;j<szer;j++){
+      if(p->ruch_zajety[i][j] == 0){
+        lista = (struct listaruchow*) malloc(sizeof(struct listaruchow));
+        lista->nast = NULL;
+
+        if(glowa == NULL)
+          glowa = lista;
+        else{
+          r = glowa;
+          while(r->nast !=NULL)
+            r = r->nast;
+          r->nast = lista;
         }
+        lista->ruch[0] = j;
+        lista->ruch[1] = i;
+      }
     }
-    return lr;
+
+  return glowa;
 }
 
 void wypiszdostepneruchy(struct pole p)
 {
     int i, j;
-    for(i = 1; i<=wys; i++)
+    for(i = 0; i<wys; i++)
     {
-        for(j = 1; j<=szer; j++)
+        for(j = 0; j<szer; j++)
         {    
             if(p.ruch_zajety[i][j] == 0)
-            printf("%d %d  ", j, i);
+            printf("%d %d  ", j+1, i+1);
         }
     }
     printf("\n");
 }
 
-struct pole interfejs(struct pole p)
+struct listaruchow interfejs(struct pole p)
 {
     struct listaruchow lr;
     int a, b;
     char i[10], j[6];
-    float c, d;
+    printf("Gdzie chcesz postawić X?\n");
     ponow:
     scanf("%s", i);   
     if(strcmp(i, "exit") == 0)
     {
         p.koniec = 1;
-        return p;
+        return lr;
     }
     else if(strcmp(i, "moves") == 0)
     {
@@ -412,60 +475,46 @@ struct pole interfejs(struct pole p)
     }
     
     scanf("%s", j);
-    p.szerokosc = atoi(i);
-    p.wysokosc = atoi(j);
+    lr.ruch[0] = atoi(i)-1;
+    lr.ruch[1] = atoi(j)-1;
 
-    if(p.ruch_zajety[p.wysokosc][p.szerokosc] == 1 || p.szerokosc>szer || p.wysokosc>wys || p.szerokosc == 0 || p.wysokosc == 0)
+    if(p.ruch_zajety[lr.ruch[1]][lr.ruch[0]] == 1 || lr.ruch[0]>szer-1 || lr.ruch[1]>wys-1)
     {
         printf("RUCH NIEDOZWOLONY!\n\n");
         goto ponow;
     }
 
-    return p;
+    return lr;
 }
 
-struct pole graj(struct pole stare, struct listaruchow starelr)
+struct pole graj(struct pole starep, struct listaruchow lr)
 {
-    struct pole p = stare;
-    struct listaruchow lr = starelr;
-    int i = 1;
-    int j = 1;
-    
+    struct pole p = starep;
+
+        
     if(p.czymgrasz == 'X')
         goto X;
     else if(p.czymgrasz == 'O')
         goto O;
-    else if(p.czymgrasz == 'b')
-        goto bot;
     
     
     X:
-    p.plansza[p.wysokosc][p.szerokosc] = 'X';
-    p.ruch_zajety[p.wysokosc][p.szerokosc] = 1;
+    p.plansza[lr.ruch[1]][lr.ruch[0]] = 'X';
+    p.ruch_zajety[lr.ruch[1]][lr.ruch[0]] = 1;
     p.pozostale_ruchy=p.pozostale_ruchy-1;
     p.wygrana = 0;
-    p.wygrana = sprawdz(p, p.szerokosc, p.wysokosc);
-    p.czymgrasz = 'b';
+    p.wygrana = sprawdz(p, lr.ruch[0], lr.ruch[1]);
+    p.czymgrasz = 'O';
     
-    return p;
-
-    bot:
-    
-    p.plansza[lr.y][lr.x] = 'O';
-    p.ruch_zajety[lr.y][lr.x] = 1;
-    p.pozostale_ruchy=p.pozostale_ruchy-1;
-    p.wygrana = 0;
-    p.wygrana = sprawdz(p, lr.x, lr.y);
-    p.czymgrasz = 'X';
     return p;
 
     O:
 
-    p.plansza[lr.y][lr.x] = 'O';
-    p.ruch_zajety[lr.y][lr.x] = 1;
+    p.plansza[lr.ruch[1]][lr.ruch[0]] = 'O';
+    p.ruch_zajety[lr.ruch[1]][lr.ruch[0]] = 1;
     p.pozostale_ruchy=p.pozostale_ruchy-1;
     p.wygrana = 0;
-    p.wygrana = sprawdz(p, lr.x, lr.y);
+    p.wygrana = sprawdz(p, lr.ruch[0], lr.ruch[1]);
     p.czymgrasz = 'X';
 
     return p;
@@ -486,4 +535,71 @@ int ponow(void)
         return 0;
     }
     
+}
+
+int negmax(struct pole* p, int glebokosc, int alfa, int beta)
+{
+    
+    if(!glebokosc)
+    {
+        return sprawdzbot(*p);
+    }
+    int ocenawezla = -1000;
+    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
+    {
+        struct pole dziecko = graj(*p, *lr);
+
+        int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
+
+        if(nowaocena > ocenawezla)
+        {
+            ocenawezla = nowaocena;
+        }
+        if(ocenawezla > alfa)
+        {
+            alfa = ocenawezla;
+        }
+        if(alfa > beta)
+        {
+            break;
+        }
+    }
+    return ocenawezla;
+
+}
+
+struct listaruchow *najlepszy_ruch(struct pole *p, int glebokosc, int alfa, int beta)
+{
+int ile = p->pozostale_ruchy;
+  int nowaocena[ile]; 
+  struct listaruchow naj_pole[ile];
+  
+  int i = -1;
+  struct listaruchow *j = NULL;
+  j = (struct listaruchow*) malloc(sizeof(struct listaruchow));
+  int maxocena;
+    for(struct listaruchow *lr = dostepneruchy(p); lr; lr = lr->nast)
+    {
+      i++;
+      struct pole dziecko = graj(*p, *lr);
+      nowaocena[i] = -negmax(&dziecko, glebokosc, alfa, beta);
+      naj_pole[i].ruch[0] = lr->ruch[0];
+      naj_pole[i].ruch[1] = lr->ruch[1];
+    }
+        i = 0;
+        j->ruch[0] = naj_pole[i].ruch[0];
+        j->ruch[1] = naj_pole[i].ruch[1];
+
+        maxocena = -50;
+        for(i;i<ile;i++)
+        {
+            if(maxocena<nowaocena[i])
+            {
+                j->ruch[0] = naj_pole[i].ruch[0];
+                j->ruch[1] = naj_pole[i].ruch[1];
+                maxocena=nowaocena[i];
+            }
+        }
+        
+    return j;
 }

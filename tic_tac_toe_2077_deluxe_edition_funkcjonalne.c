@@ -15,7 +15,7 @@ void wypisz(struct pole p)
         printf("+\n");
         printf("%d|", i+1);
         for(int j=0; j<szer; j++)
-            printf(" %1c |", p.plansza[i+1][j+1]);
+            printf(" %1c |", p.plansza[i][j]);
         printf("\n");
     }
     printf(" ");
@@ -30,9 +30,9 @@ struct pole zeruj(void)
 {
     struct pole wyzerowana;    
     
-    for(int i = 1; i<= wys; i++)
+    for(int i = 0; i< wys; i++)
     {
-        for(int j = 1; j<=szer; j++)
+        for(int j = 0; j<szer; j++)
         {
             wyzerowana.plansza[i][j] = ' ';
             wyzerowana.ruch_zajety[i][j] = 0;

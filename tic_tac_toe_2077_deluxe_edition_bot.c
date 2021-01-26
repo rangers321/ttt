@@ -1,46 +1,19 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <string.h>
 
-#include"tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
-#include"tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
+#include "tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
+#include "tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
 
-int negmax(struct pole* p, int glebokosc, int alfa, int beta)
-{
 
-    printf(" \n");
-    if(!glebokosc)
-    {
-        return sprawdzbot(*p);
-    }
-    int ocenawezla = -1000;
-    for(struct listaruchow* lr = dostepneruchy(p), *ptr = lr; lr; lr = lr->nast, free(ptr), ptr = lr)
-    {
-        
-        struct pole dziecko = graj(*p, *lr);
-        int nowaocena = -negmax(&dziecko, glebokosc-1, -beta, -alfa);
-        if(nowaocena > ocenawezla)
-        {
-            ocenawezla = nowaocena;
-        }
-        if(ocenawezla > alfa)
-        {
-            alfa = ocenawezla;
-        }
-        if(alfa > beta)
-        {
-            break;
-        }
-    }
-    return ocenawezla;
-
-}
 
 
 int main(int argc, char **argv)
 {
-    char q[1];
-    //system("clear");
+    int q;
+    system("clear");
     printf("INSTRUKCJA:\n\nSkładnia współrzędnych - K W\ncommands - wypisuje dostępne komendy\nmoves - wypisuje dostępne ruchy\nexit - kończy grę\n\n");
-    scanf("%c", q);
+    printf("\nWybierz 1 żeby grać z botem\nWybierz 2 żeby grać gracz vs gracz\n");
+    scanf("%d", &q);
     start: system("clear");
     struct pole p = zeruj();
     p.wygrana = 0;
@@ -51,65 +24,49 @@ int main(int argc, char **argv)
     struct listaruchow lr;
     for(int i=1; i<(wys*szer)*2; i++)
     {
-        //system("clear");
+        system("clear");
         wypisz(p);
         printf("Ruch X\n\n");
-        p = interfejs(p);
+        lr = interfejs(p);
         p = graj(p, lr);
         
-        if(p.wygrana == 1)
-            {
-                goto koniecX;
-            }
-            else if(p.koniec == 1)
-            {
-                return 0;
-            }
-            else if(p.pozostale_ruchy == 0)
-            {
-                goto remis;
-            }
-            else;
+        if(p.wygrana == 1000)
+        {
+            goto koniecX;
+        }
+        else if(p.koniec == 1)
+        {
+            return 0;
+        }
+        else if(p.pozostale_ruchy == 0)
+        {
+            goto remis;
+        }
+        else;
         
-        //system("clear");
+        system("clear");
         wypisz(p);
-            int c = 4;
-            int max = 10000;
-            int min = -10000;
-            int k = 1;
-            int x = 1;
-            for(int i = 1; i<=wys; i++)
-            {
-                for(int j = 1; j<=szer; j++)
-                {
-                    if(p.ruch_zajety[j][i] == 0)
-                    {
-                        int u = negmax(&p, c , max, min);
-                        printf("%d: %d\n", k, u);
-                        if(u>v)
-                        {
-                            x = k;
-                            v = u;
-                            lr.x = i;
-                            lr.y = j;
-                        }
-                    }
-                    k++;
-                }
-            }
-            p.czymgrasz = 'O';
-            printf("Wybieram: %d  %d %d %d\n", x, v, lr.x, lr.y);
+        if(q == 1)
+        {
+            struct listaruchow *naj = najlepszy_ruch(&p, 10, -100, 100);
+            p = graj(p, *naj);
+        }
+        else
+        {
+            printf("Gdzie chcesz postawić O?\n");
+            lr = interfejs(p);
             p = graj(p, lr);
-
-            if(p.wygrana == 1)
-            {
-                goto koniecO;
-            }
-            if(p.pozostale_ruchy == 0)
-            {
-                goto remis;
-            }
-            else;
+        }
+        
+        if(p.wygrana == 1000)
+        {
+            goto koniecO;
+        }
+        if(p.pozostale_ruchy == 0)
+        {
+            goto remis;
+        }
+        else;
     }
             
             

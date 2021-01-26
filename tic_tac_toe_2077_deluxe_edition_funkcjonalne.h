@@ -1,8 +1,8 @@
 #ifndef _TIC_TAC_TOE_2077_DELUXE_EDITION_FUNKCJONALNE_H
 #define _TIC_TAC_TOE_2077_DELUXE_EDITION_FUNKCJONALNE_H
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
 
 #define wygrywa 3
@@ -17,10 +17,8 @@ struct pole
 
 struct listaruchow
 {
-    int x, y;
-    int a[szer+1], b[wys+1];
+    int ruch[3];
     struct listaruchow* nast;
-    char ruchy[wys+1][szer+1];
 };
 
 void wypisz(struct pole p);

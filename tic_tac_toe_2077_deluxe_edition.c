@@ -1,5 +1,5 @@
-#include"tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
-#include"tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
+#include "tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
+#include "tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
 
 
 int main(int argc, char **argv)
