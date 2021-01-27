@@ -4,10 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tic_tac_toe_2077_deluxe_edition_wykonawcze.h"
-
-#define wygrywa 3
-#define wys 3
-#define szer 3
+#include "rozmiar_planszy.h"
 
 struct pole
 {

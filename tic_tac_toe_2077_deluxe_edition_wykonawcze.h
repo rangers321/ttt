@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "tic_tac_toe_2077_deluxe_edition_funkcjonalne.h"
 
 int sprawdz_poziom(struct pole p,int a, int b);
