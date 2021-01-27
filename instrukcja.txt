@@ -2,10 +2,7 @@ Aby zagrać w kółko i krzyżyk wpisz komendę "make"
 
 Aby przetestować pamięć naszego programu wpisz komendę "make memtest"
 
-Rozmiar planszy można zmienić w pliku rozmiar_planszy.h
-
 Rozmiar planszy oraz ilość znaków potrzebnych do zwycięstwa można zmienić w pliku rozmiar_planszy.h
-UWAGA! Po zmianie powyższych wartości należy zrobić najpierw "make clean", a potem dopiero "make"
 
 Instrucja gry:
 
