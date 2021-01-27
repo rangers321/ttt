@@ -359,7 +359,7 @@ int sprawdzbotukos2(struct pole p)
 
     for(int i = 0; i<wys; i++)
     {
-        if(p.plansza[(wys-1)-i][i] == 'O')
+        if(p.plansza[i][(szer-1)-i] == 'O')
         {
             ileX = 0;
             ileO++;
@@ -371,7 +371,7 @@ int sprawdzbotukos2(struct pole p)
                     return -1000;
             }
         }
-        else if(p.plansza[(wys-1)-i][i] == 'X')
+        else if(p.plansza[i][(szer-1)-i] == 'X')
         {
             ileO = 0;
             ileX++;
@@ -390,7 +390,7 @@ int sprawdzbotukos2(struct pole p)
 
 int sprawdzbot(struct pole p)
 {
-    int x, y, z1, z2 = 0;
+    int x, y, z1, z2;
     x = sprawdzbotpoziom(p);
     y = sprawdzbotpion(p);
     z1 = sprawdzbotukos1(p);
@@ -455,7 +455,6 @@ struct listaruchow interfejs(struct pole p)
     struct listaruchow lr;
     int a, b;
     char i[10], j[6];
-    printf("Gdzie chcesz postawić X?\n");
     ponow:
     scanf("%s", i);   
     if(strcmp(i, "exit") == 0)
@@ -505,7 +504,7 @@ struct pole graj(struct pole starep, struct listaruchow lr)
     p.wygrana = 0;
     p.wygrana = sprawdz(p, lr.ruch[0], lr.ruch[1]);
     p.czymgrasz = 'O';
-    
+
     return p;
 
     O:
@@ -570,36 +569,34 @@ int negmax(struct pole* p, int glebokosc, int alfa, int beta)
 
 struct listaruchow *najlepszy_ruch(struct pole *p, int glebokosc, int alfa, int beta)
 {
-int ile = p->pozostale_ruchy;
-  int nowaocena[ile]; 
-  struct listaruchow naj_pole[ile];
+    int nowaocena[p->pozostale_ruchy]; 
+    struct listaruchow najlepszy_ruch[p->pozostale_ruchy];
   
-  int i = -1;
-  struct listaruchow *j = NULL;
-  j = (struct listaruchow*) malloc(sizeof(struct listaruchow));
-  int maxocena;
+    int i = -1;
+    struct listaruchow *j = (struct listaruchow*) malloc(sizeof(struct listaruchow));
+
     for(struct listaruchow *lr = dostepneruchy(p); lr; lr = lr->nast)
     {
-      i++;
-      struct pole dziecko = graj(*p, *lr);
-      nowaocena[i] = -negmax(&dziecko, glebokosc, alfa, beta);
-      naj_pole[i].ruch[0] = lr->ruch[0];
-      naj_pole[i].ruch[1] = lr->ruch[1];
+        i++;
+        struct pole dziecko = graj(*p, *lr);
+        nowaocena[i] = -negmax(&dziecko, glebokosc, alfa, beta);
+        najlepszy_ruch[i].ruch[0] = lr->ruch[0];
+        najlepszy_ruch[i].ruch[1] = lr->ruch[1];
     }
-        i = 0;
-        j->ruch[0] = naj_pole[i].ruch[0];
-        j->ruch[1] = naj_pole[i].ruch[1];
-
-        maxocena = -50;
-        for(i;i<ile;i++)
+    
+    i = 0;
+    j->ruch[0] = najlepszy_ruch[i].ruch[0];
+    j->ruch[1] = najlepszy_ruch[i].ruch[1];
+    int maxocena = -1000;
+    for(i; i<p->pozostale_ruchy; i++)
+    {
+        if(nowaocena[i]>maxocena)
         {
-            if(maxocena<nowaocena[i])
-            {
-                j->ruch[0] = naj_pole[i].ruch[0];
-                j->ruch[1] = naj_pole[i].ruch[1];
-                maxocena=nowaocena[i];
-            }
+            j->ruch[0] = najlepszy_ruch[i].ruch[0];
+            j->ruch[1] = najlepszy_ruch[i].ruch[1];
+            maxocena=nowaocena[i];
         }
+    }
         
     return j;
 }

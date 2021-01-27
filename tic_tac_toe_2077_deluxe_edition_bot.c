@@ -48,12 +48,12 @@ int main(int argc, char **argv)
         wypisz(p);
         if(q == 1)
         {
-            struct listaruchow *naj = najlepszy_ruch(&p, 10, -100, 100);
-            p = graj(p, *naj);
+            struct listaruchow *najlepszy = najlepszy_ruch(&p, 4, -10000, 10000);
+            p = graj(p, *najlepszy);
         }
         else
         {
-            printf("Gdzie chcesz postawić O?\n");
+            printf("Ruch O\n");
             lr = interfejs(p);
             p = graj(p, lr);
         }
