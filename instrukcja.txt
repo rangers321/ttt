@@ -6,6 +6,9 @@ Aby uruchomić program sprawdzający funkcje sprawdzania wygranej wpisz "make te
 
 Po zakończeniu grania zalecamy wyczyszczenie plików .o i .a komendą "make clean"
 
+Rozmiar planszy oraz ilość znaków potrzebnych do zwycięstwa można zmienić w pliku rozmiar_planszy.h
+UWAGA! Po zmianie powyższych wartości należy zrobić najpierw "make clean", a potem dopiero "make"
+
 Instrucja gry:
 
 na początku wybierz w jakim trybie chcesz grać:
