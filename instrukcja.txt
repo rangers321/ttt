@@ -1,0 +1,23 @@
+Aby zagrać w kółko i krzyżyk wpisz komendę "make"
+
+Aby przetestować pamięć naszego programu wpisz komendę "make memtest"
+
+Aby uruchomić program sprawdzający funkcje sprawdzania wygranej wpisz "make test_sprawdz"
+
+Po zakończeniu grania zalecamy wyczyszczenie plików .o i .a komendą "make clean"
+
+Instrucja gry:
+
+na początku wybierz w jakim trybie chcesz grać:
+1 - z botem
+2 - z drugim graczem/sobą
+
+
+Podczas gry możesz wpisać jedną z tych komend
+Lista komend:
+
+moves - pokaże dostępne ruchy
+
+commands - pokaże dostępne komendy
+
+exit - zakończy program
