@@ -2,9 +2,7 @@ Aby zagrać w kółko i krzyżyk wpisz komendę "make"
 
 Aby przetestować pamięć naszego programu wpisz komendę "make memtest"
 
-Aby uruchomić program sprawdzający funkcje sprawdzania wygranej wpisz "make test_sprawdz"
-
-Po zakończeniu grania zalecamy wyczyszczenie plików .o i .a komendą "make clean"
+Rozmiar planszy można zmienić w pliku rozmiar_planszy.h
 
 Instrucja gry:
 

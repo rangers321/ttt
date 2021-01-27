@@ -12,6 +12,7 @@ int main(int argc, char **argv)
     int q;
     system("clear");
     printf("INSTRUKCJA:\n\nSkładnia współrzędnych - K W\ncommands - wypisuje dostępne komendy\nmoves - wypisuje dostępne ruchy\nexit - kończy grę\n\n");
+    printf("\nWygrywa %d pod rząd\n", wygrywa);
     printf("\nWybierz 1 żeby grać z botem\nWybierz 2 żeby grać gracz vs gracz\n");
     scanf("%d", &q);
     start: system("clear");
