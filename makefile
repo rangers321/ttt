@@ -1,26 +1,25 @@
 DEPS=tic_tac_toe_2077_deluxe_edition_bot.o tic_tac_toe_2077_deluxe_edition_funkcjonalne.o tic_tac_toe_2077_deluxe_edition_wykonawcze.o
 
 
-main: $(DEPS)
-	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition_bot.a
+start:play
+	
+compile:$(DEPS)
+	cc  $(DEPS) -o tic_tac_toe_2077_deluxe_edition.a
 
 %.o:%.c
 	cc -c $^ -o $@
 
 clean:
-	rm -f tic_tac_toe_2077_deluxe_edition.a
-	rm -f tic_tac_toe_2077_deluxe_edition_bot.a
+	rm -f *.a
 	rm -f *.o
+	rm -f tostery/*.a
 
-p: tic_tac_toe_2077_deluxe_edition.a
+play: compile
 	./tic_tac_toe_2077_deluxe_edition.a
 
-test:tic_tac_toe_2077_deluxe_edition.a
+memtest:tic_tac_toe_2077_deluxe_edition.a
 	valgrind --leak-check=full -s ./tic_tac_toe_2077_deluxe_edition.a
 
-bot:tic_tac_toe_2077_deluxe_edition_bot.a
-	./tic_tac_toe_2077_deluxe_edition_bot.a
-
 test_sprawdz:
-	cc tostery/sprawdz_test.c tic_tac_toe_2077_deluxe_edition_funkcjonalne.c -o sprawdz_test.a
-	./sprawdz_test.a
+	cc tostery/sprawdz_test.c tic_tac_toe_2077_deluxe_edition_funkcjonalne.c -o tostery/sprawdz_test.a
+	./tostery/sprawdz_test.a

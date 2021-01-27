@@ -18,6 +18,7 @@ int main(int argc, char **argv)
     struct pole p = zeruj();
     p.wygrana = 0;
     p.koniec = 0;
+    //strcpy(p.czymgrasz, "X");
     p.czymgrasz = 'X';
     int v = -10000;
     p.pozostale_ruchy = wys*szer;
