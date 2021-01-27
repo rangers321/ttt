@@ -17,27 +17,27 @@ int main(int argc, char **argv)
     start: system("clear");
     struct pole p = zeruj();
     p.wygrana = 0;
-    p.koniec = 0;
-    //strcpy(p.czymgrasz, "X");
     p.czymgrasz = 'X';
     int v = -10000;
     p.pozostale_ruchy = wys*szer;
     struct listaruchow lr;
+    lr.koniec = 0;
     for(int i=1; i<(wys*szer)*2; i++)
     {
         system("clear");
         wypisz(p);
         printf("Ruch X\n\n");
         lr = interfejs(p);
+        if(lr.koniec == 1)
+        {
+            return 0;
+        }
+
         p = graj(p, lr);
         
         if(p.wygrana == 1000)
         {
             goto koniecX;
-        }
-        else if(p.koniec == 1)
-        {
-            return 0;
         }
         else if(p.pozostale_ruchy == 0)
         {
@@ -56,6 +56,10 @@ int main(int argc, char **argv)
         {
             printf("Ruch O\n");
             lr = interfejs(p);
+            if(lr.koniec == 1)
+            {
+                return 0;
+            }
             p = graj(p, lr);
         }
         

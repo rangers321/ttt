@@ -9,12 +9,12 @@
 struct pole
 {
     char plansza[wys+1][szer+1], ruch_zajety[wys+1][szer+1], *czymgrasz;
-    int wygrana, pozostale_ruchy, koniec, wysokosc, szerokosc;
+    int wygrana, pozostale_ruchy;
 };
 
 struct listaruchow
 {
-    int ruch[3];
+    int ruch[3], koniec;
     struct listaruchow* nast;
 };
 

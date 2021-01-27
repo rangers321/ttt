@@ -459,7 +459,7 @@ struct listaruchow interfejs(struct pole p)
     scanf("%s", i);   
     if(strcmp(i, "exit") == 0)
     {
-        p.koniec = 1;
+        lr.koniec = 1;
         return lr;
     }
     else if(strcmp(i, "moves") == 0)
